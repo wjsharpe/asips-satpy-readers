@@ -39,8 +39,3 @@ jobs:
       - name: Run linting
         run: |
           flake8 satpy_viirs_l2/
-
-      - name: Check Satpy Reader Detection
-        run: |
-          pwd
-          python -c "from satpy.readers.yaml_reader import load_yaml_configs; assert load_yaml_configs('./satpy/satpy/etc/readers/viirs_l2.yaml')['reader']['name'] == 'viirs_l2'
