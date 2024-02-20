@@ -38,9 +38,9 @@ jobs:
 
       - name: Run linting
         run: |
-          flake8 satpy_cpe/
+          flake8 satpy_viirs_l2/
 
-      - name: Check Satpy Composite Detection
+      - name: Check Satpy Reader Detection
         run: |
-          cd /tmp
-          python -c "from satpy.composites.config_loader import load_compositor_configs_for_sensors as load_comps; assert any('my_ndvi' == data_id['name'] for data_id in load_comps({'viirs'})[0]['viirs'].keys())"
+          pwd
+          python -c "from satpy.readers.yaml_reader import load_yaml_configs; assert load_yaml_configs('./satpy/satpy/etc/readers/viirs_l2.yaml')['reader']['name'] == 'viirs_l2'
