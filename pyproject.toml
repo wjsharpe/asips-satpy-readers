@@ -3,7 +3,7 @@ name = "satpy-viirs-l2"
 description = "Satpy Plugin for VIIRS_L2 reader colormaps and enhancement."
 version = "1.0.0"
 readme = "README.md"
-license = {text = "MIT"}
+license = {text = "GPL 3.0"}
 requires-python = ">=3.8"
 dependencies = [
     "satpy",
@@ -16,7 +16,7 @@ packages = ["satpy_viirs_l2"]
 example_composites = "satpy_viirs_l2"
 
 [project.entry-points."satpy.readers"]
-example_composites = "satpy_viirs_l2"
+example_readers = "satpy_viirs_l2"
 
 [build-system]
 requires = ["setuptools>=64.0.3", "wheel"]
