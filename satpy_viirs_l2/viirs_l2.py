@@ -23,6 +23,7 @@ LOG = logging.getLogger(__name__)
 
 class VIIRSL2FileHandler(NetCDF4FileHandler):
     """NetCDF File Handler for VIIRS L2 Products."""
+
     def _parse_datetime(self, datestr):
         """Parse datetime."""
         return datetime.strptime(datestr, "%Y-%m-%dT%H:%M:%S.000Z")
@@ -57,8 +58,7 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
     def platform_name(self):
         """Get platform name."""
         try:
-            res = self.get("/attr/platform",
-                           self.filename_info["platform_shortname"])
+            res = self.get("/attr/platform", self.filename_info["platform_shortname"])
         except KeyError:
             res = "Unknown"
 
@@ -121,8 +121,7 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
         if factors is None or factors[0] is None:
             factors = [1, 0]
         if file_units == output_units:
-            LOG.debug("File units and output units are the same (%s)",
-                      file_units)
+            LOG.debug("File units and output units are the same (%s)", file_units)
             return factors
         factors = np.array(factors)
         return factors
@@ -176,6 +175,5 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
             data += factors[1]
         # rename dimensions to correspond to satpy's 'y' and 'x' standard
         if "number_of_lines" in data.dims:
-            data = data.rename({"number_of_lines": "y",
-                                "number_of_pixels": "x"})
+            data = data.rename({"number_of_lines": "y", "number_of_pixels": "x"})
         return data

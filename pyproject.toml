@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "satpy-viirs-l2"
 description = "Satpy Plugin for VIIRS_L2 reader colormaps and enhancement."
@@ -8,11 +12,27 @@ requires-python = ">=3.8"
 dependencies = [
     "satpy",
     "netCDF4"
-    #"satpy @ file:///Users/wsharpe/code/local_satpy/satpy/dist/satpy-0.1.dev12984+gbca22b4.d20240221-py2.py3-none-any.whl",
 ]
 
-[tool.setuptools]
-packages = ["satpy_viirs_l2"]
+[tool.hatch.build.targets.sdist]
+include = [
+  "/satpy_viirs_l2",
+]
+
+
+[tool.hathc.env.ci]
+dependencies = [
+ "pip-tools",
+]
+
+[tool.hatch.envs.lint]
+dependencies = [
+"black ~=23.1",
+]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 120
 
 [project.entry-points."satpy.enhancements"]
 example_enhancements = "satpy_viirs_l2"
@@ -22,7 +42,3 @@ example_composites = "satpy_viirs_l2"
 
 [project.entry-points."satpy.readers"]
 example_readers = "satpy_viirs_l2"
-
-[build-system]
-requires = ["setuptools>=64.0.3", "wheel"]
-build-backend = "setuptools.build_meta"

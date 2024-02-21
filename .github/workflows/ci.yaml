@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 flake8-docstrings flake8-debugger flake8-bugbear pyorbital
+          pip install black pyorbital
 
       - name: Install Plugin
         run: |
@@ -38,4 +38,4 @@ jobs:
 
       - name: Run linting
         run: |
-          flake8 satpy_viirs_l2/
+          black --fast satpy_viirs_l2/
