@@ -23,7 +23,6 @@ LOG = logging.getLogger(__name__)
 
 class VIIRSL2FileHandler(NetCDF4FileHandler):
     """NetCDF File Handler for VIIRS L2 Products."""
-
     def _parse_datetime(self, datestr):
         """Parse datetime."""
         return datetime.strptime(datestr, "%Y-%m-%dT%H:%M:%S.000Z")

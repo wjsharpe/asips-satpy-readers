@@ -1,0 +1,69 @@
+sensor_name: visir/viirs
+composites:
+  cer_ice:
+    compositor: !!python/name:satpy.composites.MaskingCompositor
+    prerequisites:
+      - cloud_effective_radius
+      - cloud_phase
+    conditions:
+      - method: not_equal
+        value: 2 
+        transparency: 99
+    standard_name: cer_ice
+
+  cer_water:
+    description: >
+      Cloud Effective Radius Water Phase Mask
+    compositor: !!python/name:satpy.composites.MaskingCompositor
+    prerequisites:
+      - cloud_effective_radius
+      - cloud_phase
+    conditions:
+      - method: not_equal
+        value: 1 
+        transparency: 99
+    standard_name: cer_water
+
+  Cloud_Effective_Radius:
+    description: >
+      Cloud Particle Effective Radius two-channel retrieval using 2.2 um and either 0.65 um, 0.86 um or 1.24um (specified in Quality_Assurance) from best points: not failed in any way, not marked for clear sky restoral
+    compositor: !!python/name:satpy.composites.BackgroundCompositor
+    prerequisites:
+      - name: cer_ice
+      - name: cer_water
+    common_channel_mask: False
+    standard_name: Cloud_Effective_Radius
+
+  cot_ice:
+    compositor: !!python/name:satpy.composites.MaskingCompositor
+    prerequisites:
+      - cloud_optical_thickness
+      - cloud_phase
+    conditions:
+      - method: not_equal
+        value: 2 
+        transparency: 99
+    standard_name: cot_ice
+
+  cot_water:
+    description: >
+      Cloud Effective Radius Water Phase Mask
+    compositor: !!python/name:satpy.composites.MaskingCompositor
+    prerequisites:
+      - cloud_optical_thickness
+      - cloud_phase
+    conditions:
+      - method: not_equal
+        value: 1 
+        transparency: 99
+    standard_name: cot_water
+  
+  Cloud_Optical_Thickness:
+    description: >
+      Cloud Optical Thickness two-channel retrieval using 2.2 um and either 0.65 um, 0.86 um or 1.24um (specified in Quality_Assurance) from best points: not failed in any way, not marked for clear sky restoral    
+    compositor: !!python/name:satpy.composites.BackgroundCompositor
+    prerequisites:
+      - name: cot_ice
+      - name: cot_water
+    common_channel_mask: False
+    standard_name: Cloud_Optical_Thickness

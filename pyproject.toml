@@ -7,12 +7,17 @@ license = {text = "GPL-3.0"}
 requires-python = ">=3.8"
 dependencies = [
     "satpy",
+    "netCDF4"
+    #"satpy @ file:///Users/wsharpe/code/local_satpy/satpy/dist/satpy-0.1.dev12984+gbca22b4.d20240221-py2.py3-none-any.whl",
 ]
 
 [tool.setuptools]
 packages = ["satpy_viirs_l2"]
 
 [project.entry-points."satpy.enhancements"]
+example_enhancements = "satpy_viirs_l2"
+
+[project.entry-points."satpy.composites"]
 example_composites = "satpy_viirs_l2"
 
 [project.entry-points."satpy.readers"]
