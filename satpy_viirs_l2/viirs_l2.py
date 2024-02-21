@@ -13,9 +13,6 @@ Currently a subset of four of these layers are supported
 6. Cloud Optical Thickness
 """
 
-
-
-
 import logging
 from datetime import datetime
 
@@ -172,9 +169,7 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
         if valid_min is not None and valid_max is not None:
             data = data.where((data >= valid_min) & (data <= valid_max))
         factors = (scale_factor, scale_offset)
-        factors = self.adjust_scaling_factors(
-            factors, metadata["file_units"], ds_info.get("units")
-        )
+        factors = self.adjust_scaling_factors(factors, metadata["file_units"], ds_info.get("units"))
         if factors[0] != 1 or factors[1] != 0:
             data *= factors[0]
             data += factors[1]
