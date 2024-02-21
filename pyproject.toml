@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "satpy-viirs-l2"
 description = "Satpy Plugin for VIIRS_L2 reader colormaps and enhancement."
-version = "1.0.0"
+dynamic = ["version"]
 readme = "README.md"
 license = {text = "GPL-3.0"}
 requires-python = ">=3.8"
@@ -19,6 +19,8 @@ include = [
   "/satpy_viirs_l2",
 ]
 
+[tool.hatch.version]
+path = "satpy_viirs_l2/version.py"
 
 [tool.hathc.env.ci]
 dependencies = [
@@ -42,3 +44,4 @@ example_composites = "satpy_viirs_l2"
 
 [project.entry-points."satpy.readers"]
 example_readers = "satpy_viirs_l2"
+
