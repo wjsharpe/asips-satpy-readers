@@ -38,4 +38,4 @@ jobs:
 
       - name: Run linting
         run: |
-          black --fast satpy_viirs_l2/
+          black --check satpy_viirs_l2/
