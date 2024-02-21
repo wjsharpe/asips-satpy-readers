@@ -9,7 +9,12 @@ Currently a subset of four of these layers are supported
 2. Clear Sky Confidence
 3. Cloud Top Height
 4. Deep Blue Aerosol Optical Thickness (Land and Ocean)
+5. Cloud Effective Radius
+6. Cloud Optical Thickness
 """
+
+
+
 
 import logging
 from datetime import datetime
