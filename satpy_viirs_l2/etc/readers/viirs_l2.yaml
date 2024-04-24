@@ -17,6 +17,10 @@ file_types:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
       - 'CLDMSK_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+  cldmsk_hires_l2_viirs:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDMSK_HIRES_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
   aerdb_l2_viirs:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
@@ -38,47 +42,73 @@ file_types:
 datasets:
   cld_lon:
     name: cld_lon
-    resolution: 1000
+    resolution: 750
     file_type: [cldmsk_l2_viirs, cldprop_l2_viirs]
     file_key: geolocation_data/longitude
     units: degrees
     standard_name: longitude
   cld_lat:
     name: cld_lat
-    resolution: 1000
+    resolution: 750
     file_type: [cldmsk_l2_viirs, cldprop_l2_viirs]
     file_key: geolocation_data/latitude
     units: degrees
     standard_name: latitude
   aerdb_lon:
     name: aerdb_lon
-    resolution: 1000
+    resolution: 6000
     file_type: [aerdb_l2_viirs]
     file_key: Longitude
     units: degrees
     standard_name: longitude
   aerdb_lat:
     name: aerdb_lat
-    resolution: 1000
+    resolution: 6000
     file_type: [aerdb_l2_viirs]
     file_key: Latitude
     units: degrees
     standard_name: latitude
   aerdt_lon:
     name: aerdt_lon
-    resolution: 1000
+    resolution: 750
     file_type: [aerdt_l2_viirs]
     file_key: longitude
     units: degrees
     standard_name: longitude
   aerdt_lat:
     name: aerdt_lat
-    resolution: 1000
+    resolution: 750
     file_type: [aerdt_l2_viirs]
     file_key: latitude
     units: degrees
     standard_name: latitude
-
+  sensor_zenith_angle:
+    name: sensor_zenith_angle
+    resolution: 750
+    coordinates: [cld_lon,cld_lat]
+    file_type: [cldprop_l2_viirs,cldmsk_l2_viirs]
+    file_key: geolocation_data/sensor_zenith
+    units: degrees
+  cld_high_res_lon:
+    name: cld_high_res_lon
+    resolution: 375
+    file_type: [cldmsk_hires_l2_viirs]
+    file_key: longitude
+    units: degrees
+    standard_name: longitude
+  cld_high_res_lat:
+    name: cld_high_res_lat
+    resolution: 375
+    file_type: [cldmsk_hires_l2_viirs]
+    file_key: latitude
+    units: degrees
+    standard_name: latitude
+  high_res_sensor_zenith_angle:
+    name: sensor_zenith_angle
+    resolution: 375
+    coordinates: [cld_high_res_lon,cld_high_res_lat]
+    file_type: [cldmsk_hires_l2_viirs]
+    file_key: sensor_zenith_angle
 ##################################
 # Datasets in file cldmsk_l2_viirs
 ##################################
@@ -91,6 +121,23 @@ datasets:
     file_type: cldmsk_l2_viirs
     standard_name: clear_sky_confidence
 
+  High_Res_Cloud_Mask:
+    name: High_Res_Cloud_Mask
+    long_name: VIIRS High Resolution Cloud Mask
+    units: "1"
+    coordinates: [cld_high_res_lon,cld_high_res_lat]
+    file_key: cloud_mask
+    file_type: cldmsk_hires_l2_viirs
+    standard_name: high_res_cloud_mask
+
+  Integer_Cloud_Mask:
+    name: Integer_Cloud_Mask
+    long_name: VIIRS Integer Cloud Mask
+    units: "1"
+    coordinates: [cld_lon,cld_lat]
+    file_key: geophysical_data/Integer_Cloud_Mask
+    file_type: cldmsk_l2_viirs
+    standard_name: integer_cloud_mask
 ###################################
 # Datasets in file cldprop_l2_viirs
 ###################################
@@ -150,3 +197,11 @@ datasets:
     file_key: Aerosol_Optical_Thickness_550_Land_Ocean_Best_Estimate
     file_type: [aerdb_l2_viirs]
     standard_name: aerosol_optical_thickness_550_land_ocean
+
+  aerdb_sensor_zenith_angle:
+    name: sensor_zenith_angle
+    resolution: 6000
+    coordinates: [aerdb_lon,aerdb_lat]
+    file_type: [aerdb_l2_viirs]
+    file_key: Viewing_Zenith_Angle
+    units: degrees

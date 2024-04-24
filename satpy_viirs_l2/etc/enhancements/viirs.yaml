@@ -93,3 +93,14 @@ enhancements:
             - {
                 filename: 'colormaps/mod33_brightness_temperature.csv',
               }
+  highres_cldmsk:
+    name: High_Res_Cloud_Mask
+    reader: viirs_l2
+    operations:
+      - name: colorize
+        method: !!python/name:satpy.enhancements.colorize
+        kwargs:
+          palettes:
+          - {
+              filename: colormaps/integer_cloud_mask.csv
+            }
