@@ -73,12 +73,6 @@ datasets:
     units: degrees
     coordinates: [longitude,latitude]
     standard_name: sensor_zenith_angle
-  hires_sensor_zenith_angle:
-    name: hires_zenith_angle
-    resolution: 375
-    coordinates: [hires_lon,hires_lat]
-    file_type: [cldmsk_hires_l2_viirs]
-    file_key: sensor_zenith_angle
   integer_cloud_mask:
     name: integer_cloud_mask
     file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
