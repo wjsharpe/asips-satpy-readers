@@ -15,7 +15,7 @@ Currently a subset of four of these layers are supported
 
 import logging
 from datetime import datetime
-
+from datetime import timedelta
 import numpy as np
 
 from satpy.readers.netcdf_utils import NetCDF4FileHandler
@@ -33,12 +33,21 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
     @property
     def start_time(self):
         """Get start time."""
-        return self._parse_datetime(self["/attr/time_coverage_start"])
+        try:
+            return self._parse_datetime(self["/attr/time_coverage_start"])
+        except KeyError:
+            return self.filename_info["start_time"]
 
     @property
     def end_time(self):
         """Get end time."""
-        return self._parse_datetime(self["/attr/time_coverage_end"])
+        try:
+            return self._parse_datetime(self["/attr/time_coverage_end"])
+        except KeyError:
+            if self.filename_info["spacecraft_name"] == "Aqua":
+                return self.filename_info["start_time"] + timedelta(minutes=5)
+            else:
+                return self.filename_info["start_time"] + timedelta(minutes=6)
 
     @property
     def start_orbit_number(self):
@@ -111,8 +120,8 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
                 "file_units": file_units,
                 "platform_name": self.platform_name,
                 "sensor": self.sensor_name,
-                "start_orbit": self.start_orbit_number,
-                "end_orbit": self.end_orbit_number,
+                # "start_orbit": self.start_orbit_number,
+                # "end_orbit": self.end_orbit_number,
             }
         )
         i.update(dataset_id.to_dict())
@@ -158,6 +167,7 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
             scale_offset,
         ) = self._get_dataset_valid_range(ds_info, var_path)
         data = self[var_path]
+        # FIXME
         # For aerdb Longitude and Latitude datasets have coordinates
         # This check is needed to work with yaml_reader
         if "long_name" in metadata and metadata["long_name"] == "Longitude":
