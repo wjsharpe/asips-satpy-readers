@@ -63,7 +63,7 @@ datasets:
     resolution: 375
     coordinates: [hires_lon,hires_lat]
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: sensor_zenith_angle
+    file_key: sensor_zenith
     standard_name: hires_sensor_zenith_angle
   sensor_zenith_angle:
     name: sensor_zenith_angle
