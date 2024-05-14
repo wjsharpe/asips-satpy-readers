@@ -59,7 +59,7 @@ datasets:
     units: degrees
     standard_name: latitude
   hires_sensor_zenith_angle:
-    name: sensor_zenith_angle
+    name: hires_sensor_zenith_angle
     resolution: 375
     coordinates: [hires_lon,hires_lat]
     file_type: [cldmsk_hires_l2_viirs]
@@ -95,4 +95,4 @@ datasets:
     coordinates: [hires_lon,hires_lat]
     file_key: cloud_mask
     file_type: cldmsk_hires_l2_viirs
-    standard_name: high_res_cloud_mask
+    standard_name: hires_cloud_mask
