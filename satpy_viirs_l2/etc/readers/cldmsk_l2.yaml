@@ -48,14 +48,14 @@ datasets:
     name: hires_lon
     resolution: 375
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: longitude
+    file_key: geolocation_data/longitude
     units: degrees
     standard_name: longitude
   hires_lat:
     name: hires_lat
     resolution: 375
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: latitude
+    file_key: geolocation_data/latitude
     units: degrees
     standard_name: latitude
   hires_sensor_zenith_angle:
@@ -63,7 +63,7 @@ datasets:
     resolution: 375
     coordinates: [hires_lon,hires_lat]
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: sensor_zenith
+    file_key: geolocation_data/sensor_zenith
     standard_name: hires_sensor_zenith_angle
   sensor_zenith_angle:
     name: sensor_zenith_angle
@@ -88,11 +88,19 @@ datasets:
     units: "1"
     coordinates: [longitude,latitude]
     standard_name: clear_sky_confidence
-  hires_cloud_mask:
-    name: hires_cloud_mask
-    long_name: VIIRS High Resolution Cloud Mask
+  hires_integer_cloud_mask:
+    name: hires_integer_cloud_mask
+    long_name: VIIRS High Resolution Intger Cloud Mask
     units: "1"
     coordinates: [hires_lon,hires_lat]
-    file_key: cloud_mask
+    file_key: geophysical_data/Integer_Cloud_Mask
     file_type: cldmsk_hires_l2_viirs
-    standard_name: hires_cloud_mask
+    standard_name: hires_integer_cloud_mask
+  hires_clear_sky_confidence:
+    name: hires_clear_sky_confidence
+    long_name: VIIRS High Resolution Clear Sky Confidence
+    units: "1"
+    coordinates: [hires_lon,hires_lat]
+    file_key: geophysical_data/Clear_Sky_Confidence
+    file_type: cldmsk_hires_l2_viirs
+    standard_name: hires_clear_sky_confidence
