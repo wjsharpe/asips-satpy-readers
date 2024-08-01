@@ -1,0 +1,71 @@
+reader:
+  name: cldprop_l2
+  short_name: CLDPROP L2
+  long_name: Cloud Prop Level 2 data in netCDF4 format
+  description: Generic NASA Cloud Prop L2 Reader
+  status: Alpha
+  supports_fsspec: false
+  reader: !!python/name:satpy.readers.yaml_reader.GEOFlippableFileYAMLReader
+  sensors: [modis, viirs]
+file_types:
+  cldprop_l2_modis:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDPROP_L2_MODIS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+  cldprop_l2_viirs:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDPROP_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+
+datasets:
+  longitude:
+    name: longitude
+    resolution: 
+      750:
+        file_type: [cldprop_l2_viirs]
+      1000:
+        file_type: [cldprop_l2_modis]
+    file_key: geolocation_data/longitude
+    units: degrees
+    file_type: [cldprop_l2_viirs, cldprop_l2_modis]
+    standard_name: longitude
+  latitude:
+    name: latitude
+    resolution:
+      750:
+        file_type: [cldprop_l2_viirs]
+      1000:
+        file_type: [cldprop_l2_modis]
+    file_key: geolocation_data/latitude
+    file_type: [cldprop_l2_viirs, cldprop_l2_modis]
+    units: degrees
+    standard_name: latitude
+  sensor_zenith_angle:
+    name: sensor_zenith_angle
+    long_name: Sensor Zenith Angle
+    file_type: [cldprop_l2_viirs, cldprop_l2_modis]
+    file_key: geolocation_data/sensor_zenith
+    units: degrees
+    coordinates: [longitude,latitude]
+    standard_name: sensor_zenith_angle
+  cloud_top_temperature:
+    name: Cloud_Top_Temperature 
+    file_type: [cldprop_l2_viirs,cldprop_l2_modis]
+    file_key: geophysical_data/Cloud_Top_Temperature
+    units: "K"
+    coordinates: [longitude,latitude]
+    standard_name: Cloud_Top_Temperature
+  cloud_top_height:
+    name: Cloud_Top_Height
+    file_type: [cldprop_l2_viirs,cldprop_l2_modis]
+    file_key: geophysical_data/Cloud_Top_Height
+    units: "m"
+    coordinates: [longitude,latitude]
+    standard_name: Cloud_Top_Height
+  cloud_effective_radius:
+    name: Cloud_Effective_Radius
+    file_type: [cldprop_l2_viirs,cldprop_l2_modis]
+    file_key: geophysical_data/Cloud_Effective_Radius
+    units: "micron"
+    coordinates: [longitude,latitude]
+    standard_name: Cloud_Effective_Radius

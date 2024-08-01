@@ -1,0 +1,50 @@
+reader:
+  name: aerdt_l2
+  short_name: AERDT L2
+  long_name: Dark Target Level 2 data in netCDF4 format
+  description: Generic Dark Target L2 Reader
+  status: Alpha
+  supports_fsspec: false
+  reader: !!python/name:satpy.readers.yaml_reader.GEOFlippableFileYAMLReader
+  sensors: [viirs]
+file_types:
+  aerdt_l2_viirs:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'AERDT_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+datasets:
+  longitude:
+    name: longitude
+    resolution: 6000
+    file_type: [aerdt_l2_viirs]
+    file_key: geolocation_data/longitude
+    units: degrees
+    standard_name: longitude
+  latitude:
+    name: latitude
+    resolution: 6000
+    file_type: [aerdt_l2_viirs]
+    file_key: geolocation_data/latitude
+    units: degrees
+    standard_name: latitude
+  sensor_zenith_angle:
+    name: sensor_zenith_angle
+    resolution: 6000
+    coordinates: [longitude,latitude]
+    file_type: [aerdt_l2_viirs]
+    file_key: geolocation_data/sensor_zenith_angle
+    units: degrees
+  optical_depth_land_and_ocean:
+    name: Optical_Depth_Land_And_Ocean
+    file_type: [aerdt_l2_viirs]
+    file_key: geophysical_data/Optical_Depth_Land_And_Ocean
+    units: "1"
+    coordinates: [longitude,latitude]
+    standard_name: Optical_Depth_Land_And_Ocean
+  angstrom_exponent_1_ocean:
+    name: Angstrom_Exponent_1_Ocean
+    file_type: [aerdt_l2_viirs]
+    file_key: geophysical_data/Angstrom_Exponent_1_Ocean
+    units: "1"
+    coordinates: [longitude,latitude]
+    standard_name: Angstrom_Exponent_1_Ocean
