@@ -1,0 +1,61 @@
+reader:
+  name: aerdb_l2
+  short_name: AERDB L2
+  long_name: Deep Blue Level 2 data in netCDF4 format
+  description: Generic Deep Blue L2 Reader
+  status: Alpha
+  supports_fsspec: false
+  reader: !!python/name:satpy.readers.yaml_reader.GEOFlippableFileYAMLReader
+  sensors: [viirs]
+file_types:
+  aerdb_l2_viirs:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'AERDB_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+datasets:
+  longitude:
+    name: longitude
+    resolution: 6000
+    file_key: Longitude
+    units: degrees
+    file_type: [aerdb_l2_viirs]
+    standard_name: longitude
+  latitude:
+    name: latitude
+    resolution: 6000
+    file_key: Latitude
+    file_type: [aerdb_l2_viirs]
+    units: degrees
+    standard_name: latitude
+  sensor_zenith_angle:
+    name: sensor_zenith_angle
+    long_name: Sensor Zenith Angle
+    file_type: [aerdb_l2_viirs]
+    file_key: Viewing_Zenith_Angle
+    units: degrees
+    coordinates: [longitude,latitude]
+    standard_name: sensor_zenith_angle
+  aerosol_type_land_ocean:
+    name: Aerosol_Type_Land_Ocean
+    file_type: [aerdb_l2_viirs]
+    file_key: Aerosol_Type_Land_Ocean
+    units: "1"
+    coordinates: [longitude,latitude]
+    standard_name: Aerosol_Type_Land_Ocean
+  angstrom_exponent_land_ocean_best_estimate:
+    name: Angstrom_Exponent_Land_Ocean_Best_Estimate
+    long_name: Deep Blue/SOAR Angstrom exponent over land and ocean
+    units: "1"
+    coordinates: [longitude,latitude]
+    file_key: Angstrom_Exponent_Land_Ocean_Best_Estimate
+    file_type: [aerdb_l2_viirs]
+    standard_name: Angstrom_Exponent_Land_Ocean_Best_Estimate
+  aerosol_optical_thickness_550_land_ocean:
+    name: Aerosol_Optical_Thickness_550_Land_Ocean_Best_Estimate
+    long_name: Deep Blue/SOAR aerosol optical thickness at 550 nm over land and ocean
+    units: "1"
+    coordinates: [longitude,latitude]
+    file_key: Aerosol_Optical_Thickness_550_Land_Ocean_Best_Estimate
+    file_type: [aerdb_l2_viirs]
+    standard_name: Aerosol_Optical_Thickness_550_Land_Ocean_Best_Estimate
+

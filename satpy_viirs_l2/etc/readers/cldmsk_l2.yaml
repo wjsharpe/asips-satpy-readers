@@ -19,29 +19,33 @@ file_types:
   cldmsk_hires_l2_viirs:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
-      - 'CLDMSK_HIRES_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_HIRES_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%s}.nc'
+  cldmsk_l2_viirs:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDMSK_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
 
 datasets:
   longitude:
     name: longitude
     resolution: 
       750:
-        file_type: [cldmsk_sounder_l2_viirs]
+        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs]
       1000:
         file_type: [cldmsk_sounder_l2_modis]
     file_key: geolocation_data/longitude
     units: degrees
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
     standard_name: longitude
   latitude:
     name: latitude
     resolution:
       750:
-        file_type: [cldmsk_sounder_l2_viirs]
+        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs]
       1000:
         file_type: [cldmsk_sounder_l2_modis]
     file_key: geolocation_data/latitude
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis, cldmsk_l2_viirs]
     units: degrees
     standard_name: latitude
   hires_lon:
@@ -68,26 +72,26 @@ datasets:
   sensor_zenith_angle:
     name: sensor_zenith_angle
     long_name: Sensor Zenith Angle
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
     file_key: geolocation_data/sensor_zenith
     units: degrees
     coordinates: [longitude,latitude]
     standard_name: sensor_zenith_angle
   integer_cloud_mask:
-    name: integer_cloud_mask
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
+    name: Integer_Cloud_Mask
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
     file_key: geophysical_data/Integer_Cloud_Mask
     units: "1"
     coordinates: [longitude,latitude]
-    standard_name: integer_cloud_mask
+    standard_name: Integer_Cloud_Mask
   clear_sky_confidence:
-    name: clear_sky_confidence
+    name: Clear_Sky_Confidence
     long_name: Clear Sky Confidence
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
     file_key: geophysical_data/Clear_Sky_Confidence
     units: "1"
     coordinates: [longitude,latitude]
-    standard_name: clear_sky_confidence
+    standard_name: Clear_Sky_Confidence
   hires_integer_cloud_mask:
     name: hires_integer_cloud_mask
     long_name: VIIRS High Resolution Intger Cloud Mask
