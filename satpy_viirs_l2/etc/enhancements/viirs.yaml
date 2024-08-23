@@ -1,7 +1,6 @@
 enhancements:  
   cloud_top_height:
     name: Cloud_Top_Height
-      #reader: viirs_l2
     operations:
       - name: colorize
         method: !!python/name:satpy.enhancements.colorize
@@ -51,7 +50,7 @@ enhancements:
         kwargs:
           palettes:
             - {
-                filename: 'colormaps/cloud_effective_radius_ice.csv',
+                filename: colormaps/cloud_effective_radius_ice.csv,
               }
   cer_water:
     name: cer_water
@@ -61,7 +60,7 @@ enhancements:
         kwargs:
           palettes:
             - {
-                filename: 'colormaps/cloud_effective_radius_water.csv',
+                filename: colormaps/cloud_effective_radius_water.csv,
               }
   cot_ice:
     name: cot_ice
@@ -93,9 +92,9 @@ enhancements:
             - {
                 filename: 'colormaps/mod33_brightness_temperature.csv',
               }
-  highres_cldmsk:
-    name: High_Res_Cloud_Mask
-    reader: viirs_l2
+  hires_integer_cloud_mask:
+    name: hires_integer_cloud_mask
+    reader: cldmsk_l2
     operations:
       - name: colorize
         method: !!python/name:satpy.enhancements.colorize
@@ -103,4 +102,15 @@ enhancements:
           palettes:
           - {
               filename: colormaps/integer_cloud_mask.csv
+            }
+  hires_clear_sky_confidence:
+    name: hires_clear_sky_confidence
+    reader: cldmsk_l2
+    operations:
+      - name: colorize
+        method: !!python/name:satpy.enhancements.colorize
+        kwargs:
+          palettes:
+          - {
+              filename: colormaps/clear_sky_confidence.csv
             }
