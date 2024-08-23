@@ -11,7 +11,8 @@ license = {text = "GPL-3.0"}
 requires-python = ">=3.8"
 dependencies = [
     "satpy",
-    "netCDF4"
+    "netCDF4",
+    "satpy-viirs-l2 @ file://./"
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -44,4 +45,7 @@ example_composites = "satpy_viirs_l2"
 
 [project.entry-points."satpy.readers"]
 example_readers = "satpy_viirs_l2"
+
+[tool.hatch.metadata]
+allow-direct-references = true
 

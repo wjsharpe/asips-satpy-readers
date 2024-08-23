@@ -48,6 +48,15 @@ datasets:
     units: degrees
     coordinates: [longitude,latitude]
     standard_name: sensor_zenith_angle
+  solar_zenith_angle:
+    name: solar_zenith_angle
+    long_name: Solar Zenith Angle
+    file_type: [cldprop_l2_viirs, cldprop_l2_modis]
+    file_key: geolocation_data/solar_zenith
+    units: degrees
+    coordinates: [longitude,latitude]
+    standard_name: solar_zenith_angle
+
   cloud_top_temperature:
     name: Cloud_Top_Temperature 
     file_type: [cldprop_l2_viirs,cldprop_l2_modis]
@@ -63,9 +72,16 @@ datasets:
     coordinates: [longitude,latitude]
     standard_name: Cloud_Top_Height
   cloud_effective_radius:
-    name: Cloud_Effective_Radius
+    name: cloud_effective_radius
     file_type: [cldprop_l2_viirs,cldprop_l2_modis]
     file_key: geophysical_data/Cloud_Effective_Radius
     units: "micron"
     coordinates: [longitude,latitude]
-    standard_name: Cloud_Effective_Radius
+    standard_name: cloud_effective_radius
+  cloud_phase:
+    name: cloud_phase
+    file_type: [cldprop_l2_viirs,cldprop_l2_modis]
+    file_key: geophysical_data/Cloud_Phase_Cloud_Top_Properties
+    units: "1"
+    coordinates: [longitude,latitude]
+    standard_name: cloud_phase
