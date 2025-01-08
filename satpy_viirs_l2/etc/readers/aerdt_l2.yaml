@@ -12,18 +12,23 @@ file_types:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
       - 'AERDT_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+  aerdt_l2_viirs_nrt:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'AERDT_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.nrt.nc'
+
 datasets:
   longitude:
     name: longitude
     resolution: 6000
-    file_type: [aerdt_l2_viirs]
+    file_type: [aerdt_l2_viirs,aerdt_l2_viirs_nrt]
     file_key: geolocation_data/longitude
     units: degrees
     standard_name: longitude
   latitude:
     name: latitude
     resolution: 6000
-    file_type: [aerdt_l2_viirs]
+    file_type: [aerdt_l2_viirs,aerdt_l2_viirs_nrt]
     file_key: geolocation_data/latitude
     units: degrees
     standard_name: latitude
@@ -31,19 +36,19 @@ datasets:
     name: sensor_zenith_angle
     resolution: 6000
     coordinates: [longitude,latitude]
-    file_type: [aerdt_l2_viirs]
+    file_type: [aerdt_l2_viirs,aerdt_l2_viirs_nrt]
     file_key: geolocation_data/sensor_zenith_angle
     units: degrees
   optical_depth_land_and_ocean:
     name: Optical_Depth_Land_And_Ocean
-    file_type: [aerdt_l2_viirs]
+    file_type: [aerdt_l2_viirs,aerdt_l2_viirs_nrt]
     file_key: geophysical_data/Optical_Depth_Land_And_Ocean
     units: "1"
     coordinates: [longitude,latitude]
     standard_name: Optical_Depth_Land_And_Ocean
   angstrom_exponent_1_ocean:
     name: Angstrom_Exponent_1_Ocean
-    file_type: [aerdt_l2_viirs]
+    file_type: [aerdt_l2_viirs,aerdt_l2_viirs_nrt]
     file_key: geophysical_data/Angstrom_Exponent_1_Ocean
     units: "1"
     coordinates: [longitude,latitude]

@@ -78,6 +78,14 @@ datasets:
     units: "micron"
     coordinates: [longitude,latitude]
     standard_name: cloud_effective_radius
+  cloud_optical_thickness:
+    name: cloud_optical_thickness
+    file_type: [cldprop_l2_viirs,cldprop_l2_modis]
+    file_key: geophysical_data/Cloud_Optical_Thickness
+    units: "1"
+    coordinates: [longitude,latitude]
+    standard_name: cloud_optical_thickness
+
   cloud_phase:
     name: cloud_phase
     file_type: [cldprop_l2_viirs,cldprop_l2_modis]

@@ -170,14 +170,14 @@ class VIIRSL2FileHandler(NetCDF4FileHandler):
         # FIXME
         # For aerdb Longitude and Latitude datasets have coordinates
         # This check is needed to work with yaml_reader
-        if 'aerdb_l2_viirs' in ds_info['file_type']:
-            data=data.drop_indexes(coord_names=['Idx_Atrack','Idx_Xtrack']).reset_coords(drop=True)
+        if "aerdb_l2_viirs" in ds_info["file_type"]:
+            data = data.drop_indexes(coord_names=["Idx_Atrack", "Idx_Xtrack"]).reset_coords(drop=True)
         if valid_min is not None and valid_max is not None:
             data = data.where((data >= valid_min) & (data <= valid_max))
-            if not metadata.get('valid_min'):
-                metadata['valid_min']=valid_min
-            if not metadata.get('valid_max'):
-                metadata['valid_max']=valid_max
+            if not metadata.get("valid_min"):
+                metadata["valid_min"] = valid_min
+            if not metadata.get("valid_max"):
+                metadata["valid_max"] = valid_max
         factors = (scale_factor, scale_offset)
         factors = self.adjust_scaling_factors(factors, metadata["file_units"], ds_info.get("units"))
         if factors[0] != 1 or factors[1] != 0:

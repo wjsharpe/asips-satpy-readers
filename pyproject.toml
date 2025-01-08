@@ -12,7 +12,6 @@ requires-python = ">=3.8"
 dependencies = [
     "satpy",
     "netCDF4",
-    "satpy-viirs-l2 @ file://./"
 ]
 
 [tool.hatch.build.targets.sdist]
