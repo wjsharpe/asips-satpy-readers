@@ -12,10 +12,14 @@ file_types:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
       - 'CLDMSK_SOUNDER_L2_MODIS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_SOUNDER_L2_MODIS_AIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_L2_MODIS-AIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
   cldmsk_sounder_l2_viirs:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
-      - 'CLDMSK_SOUNDER3_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_SOUNDER{proc_mode:1d}_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_SOUNDER_L2_VIIRS_CRIS__{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+      - 'CLDMSK_L2_VIIRS-CRIS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
   cldmsk_hires_l2_viirs:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
@@ -24,42 +28,50 @@ file_types:
     file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
     file_patterns:
       - 'CLDMSK_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
+  cldmsk_l2_viirs_nrt:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDMSK_L2_VIIRS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.nrt.nc'
+  cldmsk_l2_modis:
+    file_reader: !!python/name:satpy_viirs_l2.VIIRSL2FileHandler
+    file_patterns:
+      - 'CLDMSK_L2_MODIS_{spacecraft_name:s}.A{start_time:%Y%j.%H%M}.{collection:03d}.{production_time:%Y%j%H%M%S}.nc'
 
 datasets:
   longitude:
     name: longitude
     resolution: 
       750:
-        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs]
+        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs,cldmsk_l2_viirs_nrt]
       1000:
-        file_type: [cldmsk_sounder_l2_modis]
+        file_type: [cldmsk_sounder_l2_modis,cldmsk_l2_modis]
     file_key: geolocation_data/longitude
     units: degrees
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs,cldmsk_l2_modis,cldmsk_l2_viirs_nrt]
     standard_name: longitude
   latitude:
     name: latitude
     resolution:
       750:
-        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs]
+        file_type: [cldmsk_sounder_l2_viirs,cldmsk_l2_viirs,cldmsk_l2_viirs_nrt]
       1000:
-        file_type: [cldmsk_sounder_l2_modis]
+        file_type: [cldmsk_sounder_l2_modis,cldmsk_l2_modis]
     file_key: geolocation_data/latitude
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis, cldmsk_l2_viirs]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis, cldmsk_l2_viirs,cldmsk_l2_modis,cldmsk_l2_viirs_nrt]
     units: degrees
     standard_name: latitude
   hires_lon:
     name: hires_lon
     resolution: 375
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: geolocation_data/longitude
+    file_key: geolocation_data_hires/longitude
     units: degrees
     standard_name: longitude
   hires_lat:
     name: hires_lat
     resolution: 375
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: geolocation_data/latitude
+    file_key: geolocation_data_hires/latitude
     units: degrees
     standard_name: latitude
   hires_sensor_zenith_angle:
@@ -67,19 +79,19 @@ datasets:
     resolution: 375
     coordinates: [hires_lon,hires_lat]
     file_type: [cldmsk_hires_l2_viirs]
-    file_key: geolocation_data/sensor_zenith
+    file_key: geolocation_data_hires/sensor_zenith
     standard_name: hires_sensor_zenith_angle
   sensor_zenith_angle:
     name: sensor_zenith_angle
     long_name: Sensor Zenith Angle
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs,cldmsk_l2_modis,cldmsk_l2_viirs_nrt]
     file_key: geolocation_data/sensor_zenith
     units: degrees
     coordinates: [longitude,latitude]
     standard_name: sensor_zenith_angle
   integer_cloud_mask:
     name: Integer_Cloud_Mask
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs,cldmsk_l2_modis,cldmsk_l2_viirs_nrt]
     file_key: geophysical_data/Integer_Cloud_Mask
     units: "1"
     coordinates: [longitude,latitude]
@@ -87,7 +99,7 @@ datasets:
   clear_sky_confidence:
     name: Clear_Sky_Confidence
     long_name: Clear Sky Confidence
-    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs]
+    file_type: [cldmsk_sounder_l2_viirs, cldmsk_sounder_l2_modis,cldmsk_l2_viirs,cldmsk_l2_modis,cldmsk_l2_viirs_nrt]
     file_key: geophysical_data/Clear_Sky_Confidence
     units: "1"
     coordinates: [longitude,latitude]
@@ -97,7 +109,7 @@ datasets:
     long_name: VIIRS High Resolution Intger Cloud Mask
     units: "1"
     coordinates: [hires_lon,hires_lat]
-    file_key: geophysical_data/Integer_Cloud_Mask
+    file_key: geophysical_data_hires/Integer_Cloud_Mask
     file_type: cldmsk_hires_l2_viirs
     standard_name: hires_integer_cloud_mask
   hires_clear_sky_confidence:
@@ -105,6 +117,6 @@ datasets:
     long_name: VIIRS High Resolution Clear Sky Confidence
     units: "1"
     coordinates: [hires_lon,hires_lat]
-    file_key: geophysical_data/Clear_Sky_Confidence
+    file_key: geophysical_data_hires/Clear_Sky_Confidence
     file_type: cldmsk_hires_l2_viirs
     standard_name: hires_clear_sky_confidence

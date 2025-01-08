@@ -70,7 +70,7 @@ enhancements:
         kwargs:
           palettes:
             - {
-                filename: 'colormaps/cloud_optical_thickness_ice.csv',
+                filename: colormaps/cloud_optical_thickness_ice.csv,
               }
   cot_water:
     name: cot_water
@@ -80,7 +80,7 @@ enhancements:
         kwargs:
           palettes:
             - {
-                filename: 'colormaps/cloud_optical_thickness_water.csv',
+                filename: colormaps/cloud_optical_thickness_water.csv,
               }
   mod33_bt:
     name: mod33_bt
