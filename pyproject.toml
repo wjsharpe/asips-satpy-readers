@@ -4,14 +4,18 @@ build-backend = "hatchling.build"
 
 [project]
 name = "satpy-viirs-l2"
-description = "Satpy Plugin for VIIRS_L2 reader colormaps and enhancement."
+description = "Satpy Plugin for ASIPS product colormaps and enhancements."
 dynamic = ["version"]
 readme = "README.md"
 license = {text = "GPL-3.0"}
 requires-python = ">=3.8"
+authors = [
+ { name="Will Sharpe", email="wsharpe2@wisc.edu" },
+]
 dependencies = [
     "satpy",
     "netCDF4",
+    "jupyterlab",
 ]
 
 [tool.hatch.build.targets.sdist]

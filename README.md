@@ -2,6 +2,9 @@
 Enhancements and readers to plugin for Satpy for L2 products produced by UW ASIPS. This should allow for replication of NASA Worldview layers.
 Example usage of these features is shown in the provided notebook. For more extensive documentation visit https://satpy.readthedocs.io/en/latest/reading.html#adding-a-reader-to-satpy
 
+## Installation
+Git clone this repo, and then run 'hatch shell' in the cloned directory. If you don't have hatch installed in your current environment you can run 'pip install hatch'
+
 ## Reader Python Code
 All of the readers in this project use the reader python code at satpy_viirs_l2.VIIRSL2FileHandler at `satpy_viirs_l2/viirs_l2.py`, which makes some basic assumptions about the properties available.
 1. All input files are in netcdf format
